@@ -1,0 +1,359 @@
+:root {
+    --bg-color: #050505;
+    --text-color: #f0f0f0;
+    --accent-color: #d4af37; /* Gold accent */
+    --font-heading: 'Cinzel', serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+}
+
+/* Typography */
+h1, h2, h3 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+}
+
+/* Navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    mix-blend-mode: difference;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    letter-spacing: 4px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--accent-color);
+}
+
+.btn-primary {
+    background: transparent;
+    border: 1px solid var(--text-color);
+    padding: 0.5rem 1.5rem;
+    border-radius: 30px;
+    transition: all 0.3s ease !important;
+}
+
+.btn-primary:hover {
+    background: var(--text-color);
+    color: var(--bg-color) !important;
+}
+
+/* 3D Canvas Background */
+.canvas-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none; /* Let clicks pass through to sections below */
+}
+
+/* Content Sections */
+.content {
+    position: relative;
+    z-index: 1;
+}
+
+section {
+    min-height: 100vh;
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    pointer-events: none; /* Let scroll happen, but don't block canvas underneath */
+}
+
+.hero {
+    align-items: center;
+    text-align: center;
+}
+
+.hero-content {
+    margin-top: 10vh;
+}
+
+.hero h1 {
+    font-size: 6vw;
+    line-height: 1.1;
+    letter-spacing: 2px;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 1.5s ease 0.5s forwards;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    opacity: 0.7;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 1.5s ease 0.8s forwards;
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    opacity: 0;
+    animation: fadeUp 1.5s ease 1.2s forwards;
+}
+
+.scroll-indicator span {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.5;
+}
+
+.mouse {
+    width: 24px;
+    height: 40px;
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 12px;
+    position: relative;
+}
+
+.mouse::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background: #fff;
+    border-radius: 50%;
+    animation: scroll 2s infinite;
+}
+
+@keyframes scroll {
+    0% { transform: translate(-50%, 0); opacity: 1; }
+    100% { transform: translate(-50%, 15px); opacity: 0; }
+}
+
+/* Details Section */
+.detail-text {
+    max-width: 400px;
+    background: rgba(10, 10, 10, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 2.5rem;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    pointer-events: auto;
+}
+
+.detail-text.right {
+    align-self: flex-end;
+    margin-right: 5vw;
+}
+
+.detail-text.left {
+    align-self: flex-start;
+    margin-left: 5vw;
+}
+
+.detail-text h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+}
+
+.detail-text p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Customize Section */
+.customize {
+    align-items: flex-end;
+    pointer-events: auto;
+}
+
+.customize-panel {
+    background: rgba(15, 15, 15, 0.6);
+    backdrop-filter: blur(15px);
+    padding: 3rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-right: 5vw;
+    text-align: center;
+}
+
+.customize-panel h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.customize-panel p {
+    opacity: 0.7;
+    margin-bottom: 2rem;
+}
+
+.color-options {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.color-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.color-btn:hover {
+    transform: scale(1.1);
+}
+
+.color-btn.active {
+    border-color: #fff;
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255,255,255,0.3);
+}
+
+/* Checkout Section */
+.checkout {
+    align-items: center;
+    background: radial-gradient(circle at center, rgba(30,30,30,0.5) 0%, var(--bg-color) 70%);
+    pointer-events: auto;
+}
+
+.checkout-card {
+    background: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(20px);
+    padding: 4rem;
+    border-radius: 24px;
+    border: 1px solid rgba(255,255,255,0.1);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.checkout-card h2 {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.price {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    color: var(--accent-color);
+    margin-bottom: 2rem;
+}
+
+.input-group {
+    margin-bottom: 1.5rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+.btn-checkout {
+    width: 100%;
+    padding: 1.2rem;
+    background: #fff;
+    color: #000;
+    border: none;
+    border-radius: 12px;
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.btn-checkout:hover {
+    background: var(--accent-color);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+}
+
+@media (max-width: 768px) {
+    .navbar { padding: 1.5rem 2rem; }
+    .nav-links { display: none; }
+    .hero h1 { font-size: 3rem; }
+    section { padding: 2rem; }
+    .detail-text.right, .detail-text.left, .customize-panel {
+        margin: 0;
+        align-self: center;
+        width: 100%;
+    }
+}
